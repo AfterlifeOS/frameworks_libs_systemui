@@ -49,7 +49,7 @@ class MonoIconThemeController(
     private val colorProvider: (Context) -> IntArray = ThemedIconDrawable.Companion::getColors
 ) : IconThemeController {
 
-    val inset = AdaptiveIconDrawable.getExtraInsetFraction() / (1 + 2 * AdaptiveIconDrawable.getExtraInsetFraction())
+    val inset = 0.1f
 
     override val themeID = "with-theme"
 
