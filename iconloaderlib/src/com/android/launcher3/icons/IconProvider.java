@@ -341,13 +341,18 @@ public class IconProvider implements ResourceBasedOverride {
             mResID = resID;
         }
 
-        Drawable loadPaddedDrawable() {
-            if (!"drawable".equals(mResources.getResourceTypeName(mResID))) {
+       Drawable loadPaddedDrawable() {
+            try {
+                if (!"drawable".equals(mResources.getResourceTypeName(mResID))) {
+                    return null;
+                }
+                Drawable d = mResources.getDrawable(mResID).mutate();
+                d = new InsetDrawable(d, 0.28f);
+                return d;
+            } catch (Resources.NotFoundException e) {
+                // Invalid resource ID from a third-party app. Fail gracefully.
                 return null;
             }
-            Drawable d = mResources.getDrawable(mResID).mutate();
-            d = new InsetDrawable(d, 0.28f);
-            return d;
         }
     }
 
